@@ -16,6 +16,7 @@ function CarCreate() {
     const [cv, setCv] = useState(0)
     const [km, setKm] = useState(0)
     const [price, setPrice] = useState(0)
+    const [image, setImage] = useState("")
 
     const handleName = (event) => {
         let inputName = event.target.value
@@ -50,6 +51,11 @@ function CarCreate() {
     const handleModel = (event) => {
         let inputModel = event.target.value
         setModel(inputModel)
+    }
+
+    const handleImage = (event) => {
+        let inputImage = event.target.value
+        setImage(inputImage)
     }
 
 
@@ -118,6 +124,9 @@ function CarCreate() {
 
             <label>Precio:</label>
             <input type="Number" value={price} onChange={handlePrice} />
+
+            <h3>Seleccionar imagen</h3>
+            <input type="file" value={image} onChange={handleImage} accept='image/*'/>
 
             <button type='submit'>Publicar</button>
 

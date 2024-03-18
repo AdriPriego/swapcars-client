@@ -24,7 +24,7 @@ function Home() {
     <div>
       <Navbar />
       <div>
-        {cars.slice(0, 6).map((car) => (
+        {cars.slice(0, 9).map((car) => (
           <div key={car._id}>
             <Link to={`/car/${car._id}`}>
               <img src={car.image} alt="imagen coche" />
@@ -37,11 +37,14 @@ function Home() {
         ))}
       </div>
       <h1>Categorias</h1>
-      <Link to={"/cars/suvs"}>
-        <h3>Suvs</h3>
+      <Link to={"/cars/Suv"}>
+        <h3>Suv</h3>
       </Link>
-      <Link to={"/cars/cabrio"}>
+      <Link to={"/cars/Cabrio"}>
         <h3>Cabrio</h3>
+      </Link>
+      <Link to={"/cars/4x4"}>
+        <h3>4x4</h3>
       </Link>
     </div>
   )

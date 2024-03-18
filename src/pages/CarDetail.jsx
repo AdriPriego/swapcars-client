@@ -25,8 +25,9 @@ function CarDetail() {
 
   return (
     <div>
-        <h1>{car.name}</h1>
-        <h2>{car.model}</h2>
+      <p>Publicado por: </p>
+      <h1>{car.name}</h1>
+      <h2>{car.model}</h2>
     </div>
   )
 }

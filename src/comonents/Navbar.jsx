@@ -1,12 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Logo from "../assets/logo.png"
 import { Link } from 'react-router-dom'
 import { useContext } from 'react'
-import {AuthContext} from '../context/auth.context'
+import { AuthContext } from '../context/auth.context'
+import { Navigate } from "react-router-dom";
+
 
 function Navbar() {
 
-  const {isLoggedIn, user} = useContext(AuthContext)
+  const { isLoggedIn, user } = useContext(AuthContext)
 
   return (
     <nav>
@@ -15,9 +17,12 @@ function Navbar() {
       </Link>
 
       {isLoggedIn && (
-        <Link to={"/create-car"}>
-          Subir Coche
-        </Link>
+        <div>
+          <p>Hola:{user.name}</p>
+          <Link to={"/create-car"}>
+            Subir Coche
+          </Link>
+        </div>
       )}
 
       {!isLoggedIn && (
@@ -25,9 +30,9 @@ function Navbar() {
           <Link to={"/signup"}>Registrase</Link>
           <Link to={"/login"}>Iniciar Session</Link>
         </div>
-      )}  
+      )}
 
-      <button>☰</button>
+        <button>☰</button>
     </nav>
   )
 }
