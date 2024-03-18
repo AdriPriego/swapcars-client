@@ -20,7 +20,6 @@ function Home() {
       })
   }, [])
 
-
   return (
     <div>
       <Navbar />
@@ -38,6 +37,8 @@ function Home() {
         ))}
       </div>
       <h1>Categorias</h1>
+      <h3>Suvs</h3>
+      <h3>Cabrio</h3>
     </div>
   )
 }

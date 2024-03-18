@@ -16,8 +16,8 @@ function CarDetail() {
     })
     .catch((error) => {
       console.log(error)
-    }, [carId])
-  })
+    })
+  }, [carId])
 
   if (!car) {
     return <h2>Buscando</h2>
