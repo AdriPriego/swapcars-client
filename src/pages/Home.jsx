@@ -37,8 +37,12 @@ function Home() {
         ))}
       </div>
       <h1>Categorias</h1>
-      <h3>Suvs</h3>
-      <h3>Cabrio</h3>
+      <Link to={"/cars/suvs"}>
+        <h3>Suvs</h3>
+      </Link>
+      <Link to={"/cars/cabrio"}>
+        <h3>Cabrio</h3>
+      </Link>
     </div>
   )
 }

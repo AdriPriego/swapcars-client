@@ -27,7 +27,7 @@ function Navbar() {
         </div>
       )}  
 
-      <img src="" alt="user" />
+      <button>☰</button>
     </nav>
   )
 }

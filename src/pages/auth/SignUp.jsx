@@ -3,6 +3,8 @@ import Logo from "../../assets/logo.png"
 import axios from "axios"
 import { useNavigate } from 'react-router-dom'
 
+const API_URL = import.meta.env.VITE_API_URL
+
 function SignUp() {
     const navigate = useNavigate()
 
@@ -30,7 +32,7 @@ function SignUp() {
         
         try {
             
-            await axios.post("http://localhost:5005/api/auth/signup", newUser)
+            await axios.post(`${API_URL}/api/auth/signup`, newUser)
 
             navigate("/login")
 

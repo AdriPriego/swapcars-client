@@ -4,6 +4,9 @@ import Logo from "../../assets/logo.png"
 import axios from "axios"
 import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../context/auth.context'
+import { Link } from 'react-router-dom'
+
+const API_URL = import.meta.env.VITE_API_URL
 
 function Login(props) {
     const navigate = useNavigate()
@@ -27,7 +30,7 @@ function Login(props) {
 
         try {
             
-            const response = await axios.post("http://localhost:5005/api/auth/login", credentials)
+            const response = await axios.post(`${API_URL}/api/auth/login`, credentials)
             console.log(response.data.authToken)
 
             storeToken(response.data.authToken)
@@ -64,6 +67,9 @@ function Login(props) {
 
             <button>Entrar</button>
         </form>
+
+        <h3>Todavia no tienes cuenta?</h3>
+        <Link to={"/signup"}>Registrarse</Link>
 
     </div>
   )

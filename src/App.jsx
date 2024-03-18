@@ -1,6 +1,8 @@
 import './App.css'
 import { Routes } from 'react-router-dom'
 import { Route } from 'react-router-dom'
+import IsPrivate from "./comonents/IsPrivate"
+import IsAnon from "./comonents/IsAnon"
 
 //Paginas
 import SignUp from './pages/auth/SignUp'
@@ -20,8 +22,8 @@ function App() {
 
         <Route path='/' element={<Home />} />
         <Route path='/car/:carId' element={<CarDetail />} />
-        <Route path='/cars/:categoryName' element={<CategoryCars />} />
-        <Route path='/create-car' element={<CarCreate />} />
+        <Route path='/cars/:categoryName' element={<IsPrivate> <CategoryCars /> </IsPrivate>} />
+        <Route path='/create-car' element={<IsPrivate> <CarCreate /> </IsPrivate>} />
 
         <Route path='/signup' element={<SignUp />} />
         <Route path='/login' element={<Login />} />
