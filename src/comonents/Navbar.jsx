@@ -1,15 +1,31 @@
 import React from 'react'
 import Logo from "../assets/logo.png"
 import { Link } from 'react-router-dom'
+import { useContext } from 'react'
+import {AuthContext} from '../context/auth.context'
 
 function Navbar() {
+
+  const {isLoggedIn, user} = useContext(AuthContext)
+
   return (
     <nav>
-      <img id='logo' src={Logo} alt="" />
+      <Link to={"/"}>
+        <img id='logo' src={Logo} alt="" />
+      </Link>
 
-      
-      <Link to={"/signup"}>Registrase</Link>
-      <Link to={"/login"}>Iniciar Session</Link>
+      {isLoggedIn && (
+        <Link to={"/create-car"}>
+          Subir Coche
+        </Link>
+      )}
+
+      {!isLoggedIn && (
+        <div>
+          <Link to={"/signup"}>Registrase</Link>
+          <Link to={"/login"}>Iniciar Session</Link>
+        </div>
+      )}  
 
       <img src="" alt="user" />
     </nav>

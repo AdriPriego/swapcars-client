@@ -1,11 +1,14 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useState } from 'react'
 import Logo from "../../assets/logo.png"
 import axios from "axios"
 import { useNavigate } from 'react-router-dom'
+import { AuthContext } from '../../context/auth.context'
 
-function Login() {
+function Login(props) {
     const navigate = useNavigate()
+
+    const { storeToken, authenticateUser } = useContext(AuthContext)
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -25,10 +28,11 @@ function Login() {
         try {
             
             const response = await axios.post("http://localhost:5005/api/auth/login", credentials)
-            console.log(response)
+            console.log(response.data.authToken)
 
-            localStorage.setItem("authToken", response.data.authToken)
+            storeToken(response.data.authToken)
 
+            authenticateUser()
             navigate("/")
 
         } catch (error) {
