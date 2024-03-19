@@ -5,11 +5,11 @@ import axios from 'axios'
 const API_URL = import.meta.env.VITE_API_URL
 
 function CarDetail() {
-  const {carId} = useParams()
+  const params = useParams()
   const [car, setCar] = useState(null)
 
   useEffect(() => {
-    axios.get(`${API_URL}/api/cars/${carId}`)
+    axios.get(`${API_URL}/api/cars/${params.carId}`)
     .then((response) => {
       setCar(response.data)
       console.log(response.data)
@@ -17,10 +17,14 @@ function CarDetail() {
     .catch((error) => {
       console.log(error)
     })
-  }, [carId])
+  }, [params.carId])
 
   if (!car) {
     return <h2>Buscando</h2>
+  }
+
+  const deleteCar = () => {
+
   }
 
   return (
