@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
-
+import Navbar from '../comonents/Navbar'
 
 const API_URL = import.meta.env.VITE_API_URL
 
@@ -86,6 +86,7 @@ function CarCreate() {
   
     return (
     <div>
+        <Navbar/>
         <form onSubmit={handleSubmit}>
             <h1>Publicar Coche</h1>
             

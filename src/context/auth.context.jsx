@@ -22,11 +22,17 @@ function AuthProviderWrapper(props) {
       if (storedToken) {
         axios.get(`${API_URL}/api/auth/verify`, {headers: {Authorization: `Bearer ${storedToken}`}})
         .then((response) => {
-          const user = response.data
+          //const patata = {
+            //name: response.data.payload.name,
+            //email: response.data.payload.email,
+            //_id: response.data.payload._id
+          //}
+          const patata = response.data.payload
 
+          console.log(patata)
           setIsLoggedIn(true)
           setIsLoading(false)
-          setUser(user)
+          setUser(patata)
         })
         .catch((error) => {
           setIsLoggedIn(false)

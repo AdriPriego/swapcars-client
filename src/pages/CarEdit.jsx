@@ -1,6 +1,8 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import { useState } from 'react'
+import axios from 'axios'
+import Navbar from '../comonents/Navbar'
 
 
 const API_URL = import.meta.env.VITE_API_URL
@@ -67,7 +69,7 @@ function CarEdit() {
             price: price
         }
 
-        axios.put(`${API_URL}/api/cars/${carId}`, newCar)
+        axios.put(`${API_URL}/api/cars/${params.carId}`, newCar)
         .then((response) => {
             console.log(response.data)
 
@@ -81,11 +83,51 @@ function CarEdit() {
 
   return (
     <div>
-        <form>
+
+        <Navbar/>
+
+        <form onSubmit={handleSubmit}>
             <h1>Editar Anunció</h1>
 
+            
             <label>Nombre:</label>
-            <input type="text" />
+            <input type="text" onChange={handleName} />
+
+            <label>Modelo:</label>
+            <select value={model} onChange={handleModel}>
+                <option value="">--Selecciona el Modelo--</option>
+                <option value="Toyota">Toyota</option>
+                <option value="Ford">Ford</option>
+                <option value="Seat">Seat</option>
+                <option value="Suzuki">Suzuki</option>
+                <option value="Renault">Renault</option>
+                <option value="Tesla">Tesla</option>
+                <option value="Mercedes">Mercedes</option>
+                <option value="Ferrari">Ferrari</option>
+            </select>
+
+            <label>Categoria:</label>
+            <select value={category} onChange={handleCategory}>
+                <option value="">--Categoria--</option>
+                <option value="Suv">Suv</option>
+                <option value="Cabrio">Cabrio</option>
+                <option value="4x4">4x4</option>
+            </select>
+
+            <label>Año:</label>
+            <input type="Number" value={year} onChange={handleYear} />
+
+            <label>CV:</label>
+            <input type="Number" value={cv} onChange={handleCv} />
+
+            <label>KM:</label>
+            <input type="Number" value={km} onChange={handleKm} />
+
+            <label>Precio:</label>
+            <input type="Number" value={price} onChange={handlePrice} />
+
+            <button type='submit' >Publicar</button>
+
         </form>
     </div>
   )

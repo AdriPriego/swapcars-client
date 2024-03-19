@@ -23,9 +23,9 @@ function App() {
 
         <Route path='/' element={<Home />} />
         <Route path='/car/:carId' element={<CarDetail />} />
-        <Route path='/cars/:categoryName' element={<IsPrivate> <CategoryCars /> </IsPrivate>} />
+        <Route path='/category/:categoryName' element={<IsPrivate> <CategoryCars /> </IsPrivate>} />
         <Route path='/create-car' element={<IsPrivate> <CarCreate /> </IsPrivate>} />
-        <Route path='/edit-car/:carId' element={<CarEdit />} />
+        <Route path='/edit-car/:carId' element={<IsPrivate> <CarEdit /> </IsPrivate>} />
 
         <Route path='/signup' element={<SignUp />} />
         <Route path='/login' element={<Login />} />

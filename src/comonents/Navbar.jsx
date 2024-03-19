@@ -24,8 +24,8 @@ function Navbar() {
           <p>Hola:{user.name}</p>
           <Link to={"/create-car"}>
             Subir Coche
-            Favoritos
           </Link>
+            Favoritos
         </div>
       )}
 
@@ -35,8 +35,6 @@ function Navbar() {
           <Link to={"/login"}>Iniciar Session</Link>
         </div>
       )}
-
-        <button>☰</button>
     </nav>
   )
 }
