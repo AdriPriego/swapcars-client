@@ -9,6 +9,7 @@ import Cabrio from "../assets/cabrio-tarjet.jpg"
 import CardBody from 'react-bootstrap/CardBody'
 import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
+import service from "../services/file-upload.service"
 
 const API_URL = import.meta.env.VITE_API_URL
 

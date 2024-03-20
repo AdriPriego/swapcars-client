@@ -12,6 +12,8 @@ import CarDetail from "./pages/CarDetail"
 import CategoryCars from "./pages/CategoryCars"
 import CarCreate from './pages/CarCreate'
 import CarEdit from './pages/CarEdit'
+import EditQuestion from './pages/EditQuestion'
+
 
 
 
@@ -26,6 +28,7 @@ function App() {
         <Route path='/category/:categoryName' element={<IsPrivate> <CategoryCars /> </IsPrivate>} />
         <Route path='/create-car' element={<IsPrivate> <CarCreate /> </IsPrivate>} />
         <Route path='/edit-car/:carId' element={<IsPrivate> <CarEdit /> </IsPrivate>} />
+        <Route path='/edit-question/:questionId' element={<IsPrivate> <EditQuestion /> </IsPrivate>} />
 
         <Route path='/signup' element={<SignUp />} />
         <Route path='/login' element={<Login />} />

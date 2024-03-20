@@ -40,6 +40,11 @@ a {
 #foto-categoria {
   width: 310px;
 }
+@media(min-width: 932px) {
+  #foto-categoria {
+    width: 100%;
+  }
+}
 #titulo-categorias {
   text-align: center;
   text-transform: uppercase;
@@ -52,4 +57,27 @@ a {
   #foto-categoria {
     width: 100%;
   }
+  .resultados-busqueda {
+    display: flex;
+    flex-direction: column;
+  }
+  .div-todo {
+    flex-direction: column;
+  }
+}
+.div-todo {
+  display: flex;
+}
+
+#buscador {
+  margin-top: 5px;
+  height: 30px;
+}
+#boton-buscador {
+  margin-top: 8px;
+  height: 30px;
+}
+.resultados-busqueda {
+  display: flex;
+  flex-direction: column;
 }

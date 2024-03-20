@@ -1,11 +1,16 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
 import Navbar from '../comonents/Navbar'
+import { AuthContext } from '../context/auth.context'
+import { useContext } from 'react'
+import service from "../services/file-upload.service"
 
 const API_URL = import.meta.env.VITE_API_URL
 
 function CarCreate() {
+    const params = useParams()
+    const { isLoggedIn, user, } = useContext(AuthContext)
 
     const navigate = useNavigate()
 
@@ -16,7 +21,7 @@ function CarCreate() {
     const [cv, setCv] = useState(0)
     const [km, setKm] = useState(0)
     const [price, setPrice] = useState(0)
-    const [image, setImage] = useState("")
+    const [imageUrl, setImageUrl] = useState("")
 
     const handleName = (event) => {
         let inputName = event.target.value
@@ -53,9 +58,17 @@ function CarCreate() {
         setModel(inputModel)
     }
 
-    const handleImage = (event) => {
-        let inputImage = event.target.value
-        setImage(inputImage)
+    const handleFileUpload = (e) => {
+        const uploadData = new FormData()
+
+        uploadData.append("imageUrl", e.target.files[0])
+
+        service
+        .uploadImage(uploadData)
+        .then(response => {
+            setImageUrl(response.fileUrl)
+        })
+        .catch(error => console.log("error al subir file", error))
     }
 
 
@@ -69,10 +82,11 @@ function CarCreate() {
             year: year,
             cv: cv,
             km: km,
-            price: price
+            price: price,
+            imageUrl: imageUrl
         }
 
-        axios.post(`${API_URL}/api/cars`, newCar)
+        axios.post(`${API_URL}/api/cars/${user._id}`, newCar)
         .then((response) => {
             console.log(response.data)
 
@@ -127,7 +141,7 @@ function CarCreate() {
             <input type="Number" value={price} onChange={handlePrice} />
 
             <h3>Seleccionar imagen</h3>
-            <input type="file" value={image} onChange={handleImage} accept='image/*'/>
+            <input type="file" onChange={handleFileUpload}/>
 
             <button type='submit'>Publicar</button>
 
