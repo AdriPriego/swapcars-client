@@ -33,7 +33,7 @@ function CategoryCars() {
         {cars.map((car) => (
           <div key={car._id}>
             <Link to={`/car/${car._id}`}>
-              <img src={car.image} alt="imagen" />
+              <img src={car.imageUrl} alt="imagen" />
               <h1>{car.name}</h1>
               <h1>{car.model}</h1>
               <h1>{car.price}€</h1>  

@@ -34,7 +34,7 @@ function Home() {
         {cars.slice(0, 9).map((car) => (
           <div className='coches2' key={car._id}>
             <Link to={`/car/${car._id}`}>
-              <img src={car.image} alt="imagen coche" />
+              <img src={car.imageUrl} alt="imagen coche" />
               <h1>{car.price}€</h1>
               <h1>{car.name}</h1>
               <h2>{car.model}</h2>
