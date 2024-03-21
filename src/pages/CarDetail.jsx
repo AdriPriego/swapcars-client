@@ -28,6 +28,7 @@ function CarDetail() {
       .then((response) => {
         setCar(response.data)
         console.log(response.data)
+        setIsFavorite(response.data.isFavorite)
       })
       .catch((error) => {
         console.log(error)
@@ -44,6 +45,28 @@ function CarDetail() {
         navigate("/error")
       })
   }, [])
+
+  const añadirFavoritos = () => {
+    service.post(`/cars/${params.carId}/favorite`)
+    .then(response => {
+      setIsFavorite(!isFavorite)
+    })
+    .catch((error) => {
+      console.log(error)
+      navigate("/error")
+    })
+  }
+
+  const  eliminarFavoritos = () => {
+    service.delete(`/cars/${params.carId}/favorite`)
+    .then((response) => {
+      setIsFavorite(false)
+    })
+    .catch((error) => {
+      console.log(error)
+      navigate("/error")
+    })
+  }
 
   if (!car) {
     return <h2>Buscando</h2>
@@ -134,7 +157,7 @@ function CarDetail() {
             <tr>
               <td>{car.year}</td>
               <td>{car.km} km</td>
-              <td>{car.location}</td>
+              <td> <Button variant='outline-light' onClick={isFavorite ? eliminarFavoritos : añadirFavoritos}>{isFavorite ? "🤍" : "❤️"}</Button></td>
               <td>{car.category}</td>
               <td>{car.cv} cv</td>
               <td>{car.model}</td>
@@ -151,8 +174,7 @@ function CarDetail() {
           <div>
             {questions.map((eachQuestion) => (
               <div key={eachQuestion._id}>
-                <p>Pregunta de {eachQuestion.userName}</p>
-                <h4>{eachQuestion.question}</h4>
+                <h4>{eachQuestion.question} <span id='pregunta-de'>(De: {eachQuestion.userName})</span></h4>
                 {user === eachQuestion.user && (
                   <div>
                     <Button variant='outline-danger' onClick={() => deleteQuestion(eachQuestion._id)}>eliminar</Button>
@@ -183,8 +205,10 @@ function CarDetail() {
       <Navegacion />
       <div className='detalles'>
         <img src={car.imageUrl} alt="imagen" width={"300px"} />
-        <h1>{car.name}</h1>
-        <h1 id='precio'>{car.price}€</h1>
+        <div className='info-principal'>  
+          <h1>{car.name}</h1>
+          <h1 id='precio'>{car.price}€</h1>
+        </div>
         <Table striped bordered hover>
           <thead>
             <tr>
@@ -194,7 +218,7 @@ function CarDetail() {
             <tr>
               <td>{car.year}</td>
               <td>{car.km} km</td>
-              <td>{car.location}</td>
+              <td><Button variant='outline-light' onClick={isFavorite ? eliminarFavoritos : añadirFavoritos}>{isFavorite ? "🤍" : "❤️"}</Button></td>
               <td>{car.category}</td>
               <td>{car.cv} cv</td>
               <td>{car.model}</td>
@@ -206,12 +230,11 @@ function CarDetail() {
       </div>
       {isLoggedIn && (
         <div>
-          <h3>Preguntas:</h3>
           <div>
             {questions.map((eachQuestion) => (
               <div key={eachQuestion._id}>
-                <p>Pregunta de {eachQuestion.userName}</p>
-                <h4>{eachQuestion.question}</h4>
+                <h3>Preguntas:</h3>
+                <h4>{eachQuestion.question} <span id='pregunta-de'>(De: {eachQuestion.userName})</span></h4>
                 {user === eachQuestion.user && (
                   <div>
                     <Button variant='outline-danger' onClick={deleteQuestion}>eliminar</Button>
@@ -226,7 +249,6 @@ function CarDetail() {
 
           <input type="text" value={sendQuestion} onChange={handleQuestion} placeholder='Escribe tu pregunta' />
           <Button variant='outline-success' onClick={submitQuestion}>Crear</Button>
-          <button>Favorito</button>
         </div>
       )}
     </div>

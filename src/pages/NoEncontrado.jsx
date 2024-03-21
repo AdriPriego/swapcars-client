@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom'
 
 function NoEncontrado() {
   return (
-    <div>
-        <h1>No se a encontrado la pagina</h1>
-        <Link to={"/"}>Volver</Link>
+    <div className='no-encontrado'>
+        <h1>Esta Página no está disponible</h1>
+        <p id='descripcion-noencontrado'>la dirección web que ha introducido no se encuentra disponible</p>
+        <Link to={"/"}>volver</Link>
     </div>
   )
 }

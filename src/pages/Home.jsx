@@ -19,7 +19,9 @@ import Navegacion from '../comonents/Navegacion'
 import Cabrioo from "../assets/cabrioo.jpg"
 import suvDos from "../assets/suv.jpeg"
 import todoTerreno from "../assets/mucha.jpeg"
-
+import Coupe from "../assets/coupe.png"
+import Berlina from "../assets/berlina.png"
+import PickUp from "../assets/pick-up.png"
 
 function Home() {
   const navigate = useNavigate()
@@ -119,7 +121,7 @@ function Home() {
               <Card>
                 <Card.Img id='imagen-4x4' variant="top" src={Cabrio} />
                 <Card.Body className='texto-coches'>
-                  <Card.Title><h2>4x4</h2></Card.Title>
+                  <Card.Title><h2>Cabrio</h2></Card.Title>
                 </Card.Body>
               </Card>
             </CardGroup>
@@ -130,7 +132,40 @@ function Home() {
               <Card>
                 <Card.Img variant="top" src={cuatro} />
                 <Card.Body className='texto-coches'>
-                  <Card.Title><h2>Cabrio</h2></Card.Title>
+                  <Card.Title><h2>4x4</h2></Card.Title>
+                </Card.Body>
+              </Card>
+            </CardGroup>
+          </Link>
+
+          <Link to={"/category/Coupe"} className='text-decoration-none'>
+            <CardGroup className='categoria'>
+              <Card>
+                <Card.Img variant="top" src={Coupe} />
+                <Card.Body className='texto-coches'>
+                  <Card.Title><h2>Coupe</h2></Card.Title>
+                </Card.Body>
+              </Card>
+            </CardGroup>
+          </Link>
+
+          <Link to={"/category/Berlina"} className='text-decoration-none'>
+            <CardGroup className='categoria'>
+              <Card>
+                <Card.Img variant="top" src={Berlina} />
+                <Card.Body className='texto-coches'>
+                  <Card.Title><h2>Berlina</h2></Card.Title>
+                </Card.Body>
+              </Card>
+            </CardGroup>
+          </Link>
+
+          <Link to={"/category/Pick-Up"} className='text-decoration-none'>
+            <CardGroup className='categoria'>
+              <Card>
+                <Card.Img variant="top" src={PickUp} />
+                <Card.Body className='texto-coches'>
+                  <Card.Title><h2>Pick Up</h2></Card.Title>
                 </Card.Body>
               </Card>
             </CardGroup>

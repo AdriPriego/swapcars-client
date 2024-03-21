@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom'
 
 function Error() {
   return (
-    <div>
-        <h2>A ocurrido un error intentalo mas tarde </h2>
-        <Link to={"/"}>Volever</Link>
+    <div className='server-error'>
+        <h2>Internal Server Error</h2>
+        <p id='descripcion-server'>Please try again later</p>
+        <Link to={"/"}>volver</Link>
     </div>
   )
 }

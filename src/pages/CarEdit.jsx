@@ -22,6 +22,31 @@ function CarEdit() {
     const [imageUrl, setImageUrl] = useState("")
     const [description, setDescription] = useState("")
 
+    useEffect(() => {
+        const dataCarDetails = async () => {
+
+            try {
+                
+                const response = await service.get(`/cars/${params.carId}`)
+                const carData = response.data
+                console.log(response.data)
+                setName(carData.name)
+                setModel(carData.model)
+                setCategory(carData.category)
+                setYear(carData.year)
+                setCv(carData.cv)
+                setKm(carData.km)
+                setPrice(carData.price)
+                setImageUrl(carData.imageUrl)
+                setDescription(carData.description)
+
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        dataCarDetails()
+    }, [])
+
     const handleName = (event) => {
         let inputName = event.target.value
         setName(inputName)
@@ -160,6 +185,9 @@ function CarEdit() {
                     <option value="Suv">Suv</option>
                     <option value="Cabrio">Cabrio</option>
                     <option value="4x4">4x4</option>
+                    <option value="Coupe">Coupe</option>
+                    <option value="Berlina">Berlina</option>
+                    <option value="Pick-Up">Pick Up</option>
                 </select>
 
 

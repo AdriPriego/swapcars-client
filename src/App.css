@@ -81,6 +81,8 @@ a {
 }
 #precio {
   color: red;
+  margin-top: 40px;
+  margin-bottom: 60px;
 }
 #descrpcion-detalles {
   margin-top: 20px;
@@ -92,4 +94,46 @@ a {
 }
 #empezar {
   padding-right: 20px;
+}
+.categories {
+  justify-content: center;
+}
+.detalles {
+  margin-top: 40px;
+}
+.info-principal {
+  margin-top: 40px;
+}
+#pregunta-de {
+  font-size: 15px;
+}
+#name-favorites {
+  color: black;
+  margin-top: 30px;
+}
+.favoritos {
+  margin-top: 50px;
+  text-align: center;
+}
+#titulo-favoritos {
+  text-align: center;
+  margin-top: 50px;
+}
+.lista-categorias {
+  text-align: center;
+  margin-top: 30px;
+}
+.no-encontrado {
+  margin-top: 60px;
+  text-align: center;
+}
+#descripcion-noencontrado {
+  margin-top: 30px;
+}
+.server-error {
+  margin-top: 60px;
+  text-align: center;
+}
+#descripcion-server {
+  margin-top: 30px;
 }

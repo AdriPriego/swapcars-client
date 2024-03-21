@@ -164,6 +164,9 @@ function CarCreate() {
                     <option value="Suv">Suv</option>
                     <option value="Cabrio">Cabrio</option>
                     <option value="4x4">4x4</option>
+                    <option value="Coupe">Coupe</option>
+                    <option value="Berlina">Berlina</option>
+                    <option value="Pick-Up">Pick Up</option>
                 </select>
 
 

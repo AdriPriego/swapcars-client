@@ -35,16 +35,18 @@ function CategoryCars() {
     <div>
       <Navegacion />
       {cars.map((car) => (
-        <div key={car._id}>
+        <div className='todo' key={car._id} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <Link to={`/car/${car._id}`} className='text-decoration-none'>
-            <Card style={{ width: '18rem' }}>
-              <Card.Img variant="top" src={car.imageUrl} />
-              <Card.Body>
-                <Card.Title>{car.name}</Card.Title>
-                <h1>{car.model}</h1>
-                <h1>{car.price}€</h1>
-                <Button variant="primary">Ver Mas</Button>
-              </Card.Body>
+            <Card className='lista-categorias' style={{ width: '18rem' }}>
+              <div>
+                <Card.Img variant="top" src={car.imageUrl} />
+                <Card.Body>
+                  <Card.Title>{car.name}</Card.Title>
+                  <h1>{car.model}</h1>
+                  <h1>{car.price}€</h1>
+                  <Button variant="primary">Ver Mas</Button>
+                </Card.Body>
+              </div>
             </Card>
           </Link>
         </div>
