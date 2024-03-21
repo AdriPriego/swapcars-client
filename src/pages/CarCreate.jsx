@@ -1,19 +1,22 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
+import service from '../services/config.services'
 import Navbar from '../comonents/Navbar'
 import { AuthContext } from '../context/auth.context'
 import { useContext } from 'react'
-import service from "../services/file-upload.service"
+import services from "../services/file-upload.service"
 
 const API_URL = import.meta.env.VITE_API_URL
 
 function CarCreate() {
+
+    
     const params = useParams()
     const { isLoggedIn, user, } = useContext(AuthContext)
-
+    
     const navigate = useNavigate()
-
+    
     const [name, setName] = useState("")
     const [model, setModel] = useState("")
     const [category, setCategory] = useState("")
@@ -63,7 +66,7 @@ function CarCreate() {
 
         uploadData.append("imageUrl", e.target.files[0])
 
-        service
+        services
         .uploadImage(uploadData)
         .then(response => {
             setImageUrl(response.fileUrl)
@@ -83,10 +86,11 @@ function CarCreate() {
             cv: cv,
             km: km,
             price: price,
-            imageUrl: imageUrl
+            imageUrl: imageUrl,
+            userCar: user
         }
 
-        axios.post(`${API_URL}/api/cars/${user._id}`, newCar)
+        service.post(`/cars`, newCar)
         .then((response) => {
             console.log(response.data)
 

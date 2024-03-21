@@ -35,7 +35,8 @@ function Login(props) {
 
             storeToken(response.data.authToken)
 
-            authenticateUser()
+            await authenticateUser()
+            
             navigate("/")
 
         } catch (error) {

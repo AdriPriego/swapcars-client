@@ -73,7 +73,7 @@ function CarEdit() {
         .then((response) => {
             console.log(response.data)
 
-            navigate("/")
+            navigate(`/`)
         })
         .catch((error) => {
             console.log(error)

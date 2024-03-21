@@ -114,7 +114,6 @@ function CarDetail() {
   return (
     <div>
       <NavBar />
-      <p>Publicado por: {car.userCar.name}</p>
       <img src={car.imageUrl} alt="imagen" />
       <h1>{car.name}</h1>
       <h1>{car.price}€</h1>

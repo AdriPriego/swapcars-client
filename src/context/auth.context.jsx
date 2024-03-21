@@ -11,6 +11,7 @@ function AuthProviderWrapper(props) {
     const [isLoggedIn, setIsLoggedIn] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
     const [user, setUser] = useState(null)
+    const [userName, setUserName] = useState(null)
 
     const storeToken = (token) => {
       localStorage.setItem("authToken", token)
@@ -27,12 +28,14 @@ function AuthProviderWrapper(props) {
             //email: response.data.payload.email,
             //_id: response.data.payload._id
           //}
-          const patata = response.data.payload
+          const patata = response.data
 
           console.log(patata)
           setIsLoggedIn(true)
           setIsLoading(false)
-          setUser(patata)
+          setUser(patata._id)
+          setUserName(patata.name)
+          console.log(patata.name)
         })
         .catch((error) => {
           setIsLoggedIn(false)
@@ -60,7 +63,7 @@ function AuthProviderWrapper(props) {
     }, [])
 
   return (
-    <AuthContext.Provider value={{isLoggedIn, isLoading, user, storeToken, authenticateUser, logOutUser}}>
+    <AuthContext.Provider value={{isLoggedIn, isLoading, user, storeToken, authenticateUser, logOutUser, userName}}>
         {props.children}
     </AuthContext.Provider>
   )

@@ -48,15 +48,13 @@ function Navbar() {
                 <div key={car._id}>
                   <li>
                     <Link to={`/car/${car._id}`}>
-                      <img src={car.img} alt="imagen" />
-                      <p>{car.name}</p>
+                      <img src={car.imageUrl} alt="imagen" />
                     </Link>
                   </li>
                 </div>
               ))}
             </ul>
           </div>
-          <p id='bienvenido'>Hola:{user.name}</p>
           <button id='logout' onClick={logOutUser}>Salir</button>
           <div>
             <Link to={"/create-car"}>

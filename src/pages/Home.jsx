@@ -10,12 +10,14 @@ import CardBody from 'react-bootstrap/CardBody'
 import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
 import service from "../services/file-upload.service"
+import { AuthContext } from '../context/auth.context'
+import { useContext } from 'react'
 
 const API_URL = import.meta.env.VITE_API_URL
 
 function Home() {
   const [cars, setCars] = useState([])
-
+  const { isLoggedIn, user, userName } = useContext(AuthContext)
   useEffect(() => {
     axios.get(`${API_URL}/api/cars`)
       .then((response) => {
@@ -30,6 +32,7 @@ function Home() {
   return (
     <div>
       <Navbar />
+      <p>Hola: {userName}</p>
       <div className='coches'>
         {cars.slice(0, 9).map((car) => (
           <div className='coches2' key={car._id}>
