@@ -10,7 +10,7 @@ import Button from 'react-bootstrap/Button';
 function CarDetail() {
   const navigate = useNavigate()
   const { isLoggedIn, user, userName } = useContext(AuthContext)
-
+  
   const params = useParams()
   const [car, setCar] = useState(null)
   const [sendQuestion, setSendQuestion] = useState("")
@@ -60,7 +60,8 @@ function CarDetail() {
 
     const newQuestion = {
       question: sendQuestion,
-      user: user
+      user: user,
+      userName: userName
     }
 
     service.post(`question/${params.carId}`, newQuestion)
@@ -127,6 +128,7 @@ function CarDetail() {
           <div>
             {questions.map((eachQuestion) => (
               <div key={eachQuestion._id}>
+                <p>Pregunta de {eachQuestion.userName}</p>
                 <h4>{eachQuestion.question}</h4>
                 {user === eachQuestion.user && (
                   <div>
@@ -173,6 +175,7 @@ function CarDetail() {
           <div>
             {questions.map((eachQuestion) => (
               <div  key={eachQuestion._id}>
+                <p>Pregunta de {eachQuestion.userName}</p>
                 <h4>{eachQuestion.question}</h4>
                 {user === eachQuestion.user && (
                   <div>

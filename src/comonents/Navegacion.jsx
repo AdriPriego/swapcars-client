@@ -11,6 +11,7 @@ import { useContext } from 'react'
 import { AuthContext } from '../context/auth.context'
 import service from '../services/config.services'
 import { useState } from 'react';
+import Card from 'react-bootstrap/Card';
 
 function Navegacion() {
 
@@ -53,15 +54,15 @@ function Navegacion() {
                                     navbarScroll
                                 >
                                     <NavDropdown title={userName} id="navbarScrollingDropdown">
-                                            <Link to={"/create-car"}>
-                                                Subir Coche
-                                            </Link>
-                                            <br />
-                                            <Link to={"/favorites"}>
-                                                Favoritos
-                                            </Link>
-                                            <br />
-                                            <Button id='logout' variant="outline-danger" onClick={logOutUser}>Salir</Button>
+                                        <Link to={"/create-car"}>
+                                            Subir Coche
+                                        </Link>
+                                        <br />
+                                        <Link to={"/favorites"}>
+                                            Favoritos
+                                        </Link>
+                                        <br />
+                                        <Button id='logout' variant="outline-danger" onClick={logOutUser}>Salir</Button>
                                         <NavDropdown.Divider />
                                     </NavDropdown>
                                 </Nav>
@@ -81,7 +82,12 @@ function Navegacion() {
                                                 <div key={car._id}>
                                                     <li>
                                                         <Link to={`/car/${car._id}`}>
-                                                            <img src={car.imageUrl} alt="imagen" />
+                                                            <Card style={{ width: '18rem' }}>
+                                                                <Card.Img variant="top" src={car.imageUrl} width={"30px"} />
+                                                                <Card.Body>
+                                                                    <p>{car.name}</p>
+                                                                </Card.Body>
+                                                            </Card>
                                                         </Link>
                                                     </li>
                                                 </div>
@@ -91,18 +97,21 @@ function Navegacion() {
                                 </Form>
                             </Navbar.Collapse>
                         </div>
-                    )}
+                    )
+                    }
 
-                    {!isLoggedIn && (
-                        <div>
-                            <Link to={"/signup"}>Registrase</Link>
-                            <Link to={"/login"}>Iniciar Session</Link>
-                        </div>
-                    )}
+                    {
+                        !isLoggedIn && (
+                            <div>
+                                <Link to={"/signup"}>Registrase</Link>
+                                <Link to={"/login"}>Iniciar Session</Link>
+                            </div>
+                        )
+                    }
 
-                </Container>
-            </Navbar>
-        </div>
+                </Container >
+            </Navbar >
+        </div >
     )
 }
 

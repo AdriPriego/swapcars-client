@@ -57,7 +57,7 @@ function SignUp() {
         <Form onSubmit={handleSignup}>
                 <Form.Group className="mb-3" controlId="formBasicName">
                     <Form.Label>Nombre</Form.Label>
-                    <Form.Control value={name} onChange={handleName} type="email" placeholder="Nombre" />
+                    <Form.Control value={name} onChange={handleName} type="text" placeholder="Nombre" />
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -67,7 +67,7 @@ function SignUp() {
 
                 <Form.Group className="mb-3" controlId="formBasicLocation">
                     <Form.Label>Ubicación</Form.Label>
-                    <Form.Control value={location} onChange={handleLocation} type="email" placeholder="Ubicación" />
+                    <Form.Control value={location} onChange={handleLocation} type="text" placeholder="Ubicación" />
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
