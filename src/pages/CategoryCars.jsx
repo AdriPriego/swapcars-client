@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
-import Navbar from '../comonents/Navbar'
+import Navegacion from '../comonents/Navegacion'
 import { Link } from 'react-router-dom'
 
 const API_URL = import.meta.env.VITE_API_URL
@@ -29,7 +29,7 @@ function CategoryCars() {
   
   return (
     <div>
-      <Navbar/>
+      <Navegacion/>
         {cars.map((car) => (
           <div key={car._id}>
             <Link to={`/car/${car._id}`}>

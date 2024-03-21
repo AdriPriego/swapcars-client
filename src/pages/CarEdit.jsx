@@ -2,7 +2,7 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 import { useState } from 'react'
 import service from '../services/config.services'
-import Navbar from '../comonents/Navbar'
+import Navegacion from '../comonents/Navegacion'
 
 function CarEdit() {
 
@@ -80,7 +80,7 @@ function CarEdit() {
   return (
     <div>
 
-        <Navbar/>
+        <Navegacion/>
 
         <form onSubmit={handleSubmit}>
             <h1>Editar Anunció</h1>

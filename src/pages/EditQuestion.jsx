@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import Navbar from '../comonents/Navbar'
+import Navegacion from '../comonents/Navegacion'
 import service from '../services/config.services'
 
 
@@ -35,7 +35,7 @@ function EditQuestion() {
 
   return (
     <div>
-        <Navbar/>
+        <Navegacion/>
 
         <form onSubmit={handleSubmit}>
 

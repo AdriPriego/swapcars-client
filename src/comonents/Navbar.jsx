@@ -58,7 +58,9 @@ function Navbar() {
             <Link to={"/create-car"}>
               Subir Coche
             </Link>
+            <Link to={"/favorites"}>
               Favoritos
+            </Link>
           </div>
         </div>
       )}

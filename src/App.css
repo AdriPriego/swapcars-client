@@ -13,3 +13,29 @@ a {
   color: black;
   text-decoration: none;
 }
+.texto-coches {
+  text-align: center;
+}
+.coches {
+  padding: 30px;
+}
+
+#titulo-categoria {
+  text-transform: uppercase;
+  text-decoration: underline;
+  margin-top: 100px;
+  margin-bottom: 50px;
+  text-align: center;
+}
+.categoria {
+  padding: 50px;
+}
+.todos-coches {
+  padding-top: 20px;
+}
+.carousel {
+  padding: 50px;
+}
+.detalles {
+  text-align: center;
+}

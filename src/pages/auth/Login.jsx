@@ -5,6 +5,8 @@ import axios from "axios"
 import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../context/auth.context'
 import { Link } from 'react-router-dom'
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
 const API_URL = import.meta.env.VITE_API_URL
 
@@ -29,14 +31,14 @@ function Login(props) {
         }
 
         try {
-            
+
             const response = await axios.post(`${API_URL}/api/auth/login`, credentials)
             console.log(response.data.authToken)
 
             storeToken(response.data.authToken)
 
             await authenticateUser()
-            
+
             navigate("/")
 
         } catch (error) {
@@ -52,28 +54,34 @@ function Login(props) {
     }
 
 
-  return (
-    <div>
-        <img src={Logo} alt="Logo" />
-        <h1>Inicar Session</h1>
+    return (
+        <div>
+            <img src={Logo} alt="Logo" width={"300px"} />
+            <h1>Inicar Session</h1>
+            
+            <Form onSubmit={handleLogin}>
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Label>Email</Form.Label>
+                    <Form.Control value={email} onChange={handleEmail} type="email" placeholder="Enter email" />
+                </Form.Group>
 
-        <form onSubmit={handleLogin}>
-            <label>Email</label>
-            <input value={email} type="email" onChange={handleEmail}/>
+                <Form.Group className="mb-3" controlId="formBasicPassword">
+                    <Form.Label>Contraseña</Form.Label>
+                    <Form.Control value={password} onChange={handlePassword} type="password" placeholder="Password" />
+                </Form.Group>
 
-            <label>Contraseña</label>
-            <input value={password} type="password" onChange={handlePassword}/>
+                <p>{errorMessage}</p>
 
-            <p>{errorMessage}</p>
+                <Button variant="primary" type="submit">
+                    Submit
+                </Button>
+            </Form>
 
-            <button>Entrar</button>
-        </form>
+            <h3>Todavia no tienes cuenta?</h3>
+            <Link to={"/signup"}>Registrarse</Link>
 
-        <h3>Todavia no tienes cuenta?</h3>
-        <Link to={"/signup"}>Registrarse</Link>
-
-    </div>
-  )
+        </div>
+    )
 }
 
 export default Login

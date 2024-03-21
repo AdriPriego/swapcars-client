@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import NavBar from "../comonents/Navbar"
+import Navegacion from '../comonents/Navegacion'
 import { Link } from 'react-router-dom'
 import { AuthContext } from '../context/auth.context'
 import { useContext } from 'react'
 import service from '../services/config.services'
+import Button from 'react-bootstrap/Button';
 
 function CarDetail() {
   const navigate = useNavigate()
@@ -14,7 +15,8 @@ function CarDetail() {
   const [car, setCar] = useState(null)
   const [sendQuestion, setSendQuestion] = useState("")
   const [questions, setQuestion] = useState([])
-
+  const [isFavorite, setIsFavorite] = useState(false)
+ 
   const handleQuestion = (event) => {
     let inputQuestion = event.target.value
     setSendQuestion(inputQuestion)
@@ -88,8 +90,8 @@ function CarDetail() {
       })
   }
 
-  const deleteQuestion = () => {
-    service.delete(`/${questionId}`)
+  const deleteQuestion = (questionId) => {
+    service.delete(`/question/${questionId}`)
       .then(() => {
         console.log("eliminado")
         service.get(`/question/${params.carId}`)
@@ -108,15 +110,16 @@ function CarDetail() {
 
   if (user === car.userCar) {
     return <div>
-      <NavBar />
-      <img src={car.imageUrl} alt="imagen" />
-      <h1>{car.name}</h1>
-      <h1>{car.price}€</h1>
-      <h2>Modelo: {car.model}</h2>
-      <h2>Año: {car.year}</h2>
-      <h2>{car.km} km</h2>
-      <h2>{car.cv} cv</h2>
-
+      <Navegacion/>
+      <div className='detalles'>
+        <img src={car.imageUrl} alt="imagen" width={"300px"}/>
+        <h1>{car.name}</h1>
+        <h1>{car.price}€</h1>
+        <h2>Modelo: {car.model}</h2>
+        <h2>Año: {car.year}</h2>
+        <h2>{car.km} km</h2>
+        <h2>{car.cv} cv</h2>
+      </div>
 
       {isLoggedIn && (
         <div>
@@ -124,39 +127,44 @@ function CarDetail() {
           <div>
             {questions.map((eachQuestion) => (
               <div key={eachQuestion._id}>
-                <h4>{eachQuestion.question}<button onClick={deleteQuestion}>eliminar</button></h4>
-                <Link to={`/edit-question/${eachQuestion._id}`}>
-                  <button>Editar</button>
-                </Link>
+                <h4>{eachQuestion.question}</h4>
+                {user === eachQuestion.user && (
+                  <div>
+                    <Button variant='outline-danger' onClick={() => deleteQuestion(eachQuestion._id)}>eliminar</Button>
+                    <Link to={`/edit-question/${eachQuestion._id}`}>
+                      <Button variant='outline-warning'>Editar</Button>
+                    </Link>
+                  </div>
+                )}
               </div>
             ))}
           </div>
 
           <input type="text" value={sendQuestion} onChange={handleQuestion} placeholder='Escribe tu pregunta' />
-          <button onClick={submitQuestion}>Crear una pregunta</button>
+          <Button variant='outline-success' onClick={submitQuestion}>Crear</Button>
           <br />
           <br />
-          <button onClick={handleDelete}>Eliminar</button>
-          <Link to={`/edit-car/${params.carId}`}>Editar</Link>
+          <Button variant='outline-danger' onClick={handleDelete}>Eliminar</Button>
+          <Link to={`/edit-car/${params.carId}`}>
+            <Button variant='outline-secondary'>Editar</Button>
+            </Link>
         </div>
       )}
     </div>
   }
 
-  if (eachQuestion._id === user) {
-                  
-  }
-
   return (
     <div>
-      <NavBar />
-      <img src={car.imageUrl} alt="imagen" />
-      <h1>{car.name}</h1>
-      <h1>{car.price}€</h1>
-      <h2>Modelo: {car.model}</h2>
-      <h2>Año: {car.year}</h2>
-      <h2>{car.km} km</h2>
-      <h2>{car.cv} cv</h2>
+      <Navegacion/>
+      <div className='detalles'>
+        <img src={car.imageUrl} alt="imagen" width={"300px"}/>
+        <h1>{car.name}</h1>
+        <h1>{car.price}€</h1>
+        <h2>Modelo: {car.model}</h2>
+        <h2>Año: {car.year}</h2>
+        <h2>{car.km} km</h2>
+        <h2>{car.cv} cv</h2>
+      </div>
 
 
       {isLoggedIn && (
@@ -164,19 +172,23 @@ function CarDetail() {
           <h3>Preguntas:</h3>
           <div>
             {questions.map((eachQuestion) => (
-              <div key={eachQuestion._id}>
-                <h4>{eachQuestion.question}<button onClick={deleteQuestion}>eliminar</button></h4>
-                <Link to={`/edit-question/${eachQuestion._id}`}>
-                  <button>Editar</button>
-                </Link>
+              <div  key={eachQuestion._id}>
+                <h4>{eachQuestion.question}</h4>
+                {user === eachQuestion.user && (
+                  <div>
+                    <Button variant='outline-danger' onClick={deleteQuestion}>eliminar</Button>
+                    <Link to={`/edit-question/${eachQuestion._id}`}>
+                      <Button variant='outline-warning'>Editar</Button>
+                    </Link>
+                  </div>
+                )}
               </div>
             ))}
           </div>
 
           <input type="text" value={sendQuestion} onChange={handleQuestion} placeholder='Escribe tu pregunta' />
-          <button onClick={submitQuestion}>Crear una pregunta</button>
-          <br />
-          <br />
+          <Button variant='outline-success' onClick={submitQuestion}>Crear</Button>
+          <button>Favorito</button>
         </div>
       )}
     </div>

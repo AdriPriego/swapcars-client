@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import service from '../services/config.services'
-import Navbar from '../comonents/Navbar'
+import Navegacion from '../comonents/Navegacion'
 import { AuthContext } from '../context/auth.context'
 import { useContext } from 'react'
 import services from "../services/file-upload.service"
@@ -102,7 +102,7 @@ function CarCreate() {
   
     return (
     <div>
-        <Navbar/>
+        <Navegacion/>
         <form onSubmit={handleSubmit}>
             <h1>Publicar Coche</h1>
             

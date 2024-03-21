@@ -2,6 +2,8 @@ import { useState } from 'react'
 import Logo from "../../assets/logo.png"
 import axios from "axios"
 import { useNavigate } from 'react-router-dom'
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
 const API_URL = import.meta.env.VITE_API_URL
 
@@ -49,26 +51,36 @@ function SignUp() {
 
   return (
     <div>
-        <img src={Logo} alt="logo" />
+        <img src={Logo} alt="logo" width={"300px"}/>
         <h1>Registrate</h1>
 
-        <form onSubmit={handleSignup}>
-            <label>Nombre</label>
-            <input value={name} type="text" name='name'onChange={handleName} />
+        <Form onSubmit={handleSignup}>
+                <Form.Group className="mb-3" controlId="formBasicName">
+                    <Form.Label>Nombre</Form.Label>
+                    <Form.Control value={name} onChange={handleName} type="email" placeholder="Nombre" />
+                </Form.Group>
 
-            <label>Email</label>
-            <input value={email} type="email" name='email' onChange={handleEmail}/>
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Label>Email</Form.Label>
+                    <Form.Control value={email} onChange={handleEmail} type="email" placeholder="Email" />
+                </Form.Group>
 
-            <label>Ubicación</label>
-            <input value={location} type="text" name='location'onChange={handleLocation} />
+                <Form.Group className="mb-3" controlId="formBasicLocation">
+                    <Form.Label>Ubicación</Form.Label>
+                    <Form.Control value={location} onChange={handleLocation} type="email" placeholder="Ubicación" />
+                </Form.Group>
 
-            <label>Contraseña</label>
-            <input value={password} type="password" name='password' onChange={handlePassword}/>
+                <Form.Group className="mb-3" controlId="formBasicPassword">
+                    <Form.Label>Contraseña</Form.Label>
+                    <Form.Control value={password} onChange={handlePassword} type="password" placeholder="Password" />
+                </Form.Group>
 
-            <p>{errorMessage}</p>
+                <p>{errorMessage}</p>
 
-            <button>Confirmar</button>
-        </form>
+                <Button variant="primary" type="submit">
+                    Submit
+                </Button>
+            </Form>
     </div>
   )
 }
