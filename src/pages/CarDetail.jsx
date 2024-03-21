@@ -14,7 +14,6 @@ function CarDetail() {
   const [car, setCar] = useState(null)
   const [sendQuestion, setSendQuestion] = useState("")
   const [questions, setQuestion] = useState([])
-  const [creatorName, setCreatorName] = useState("")
 
   const handleQuestion = (event) => {
     let inputQuestion = event.target.value
@@ -107,8 +106,8 @@ function CarDetail() {
       })
   }
 
-  return (
-    <div>
+  if (user === car.userCar) {
+    return <div>
       <NavBar />
       <img src={car.imageUrl} alt="imagen" />
       <h1>{car.name}</h1>
@@ -139,6 +138,45 @@ function CarDetail() {
           <br />
           <button onClick={handleDelete}>Eliminar</button>
           <Link to={`/edit-car/${params.carId}`}>Editar</Link>
+        </div>
+      )}
+    </div>
+  }
+
+  if (eachQuestion._id === user) {
+                  
+  }
+
+  return (
+    <div>
+      <NavBar />
+      <img src={car.imageUrl} alt="imagen" />
+      <h1>{car.name}</h1>
+      <h1>{car.price}€</h1>
+      <h2>Modelo: {car.model}</h2>
+      <h2>Año: {car.year}</h2>
+      <h2>{car.km} km</h2>
+      <h2>{car.cv} cv</h2>
+
+
+      {isLoggedIn && (
+        <div>
+          <h3>Preguntas:</h3>
+          <div>
+            {questions.map((eachQuestion) => (
+              <div key={eachQuestion._id}>
+                <h4>{eachQuestion.question}<button onClick={deleteQuestion}>eliminar</button></h4>
+                <Link to={`/edit-question/${eachQuestion._id}`}>
+                  <button>Editar</button>
+                </Link>
+              </div>
+            ))}
+          </div>
+
+          <input type="text" value={sendQuestion} onChange={handleQuestion} placeholder='Escribe tu pregunta' />
+          <button onClick={submitQuestion}>Crear una pregunta</button>
+          <br />
+          <br />
         </div>
       )}
     </div>
