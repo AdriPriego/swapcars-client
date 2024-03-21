@@ -6,17 +6,18 @@ import { AuthContext } from '../context/auth.context'
 import { useContext } from 'react'
 import service from '../services/config.services'
 import Button from 'react-bootstrap/Button';
+import Table from 'react-bootstrap/Table';
 
 function CarDetail() {
   const navigate = useNavigate()
   const { isLoggedIn, user, userName } = useContext(AuthContext)
-  
+
   const params = useParams()
   const [car, setCar] = useState(null)
   const [sendQuestion, setSendQuestion] = useState("")
   const [questions, setQuestion] = useState([])
   const [isFavorite, setIsFavorite] = useState(false)
- 
+
   const handleQuestion = (event) => {
     let inputQuestion = event.target.value
     setSendQuestion(inputQuestion)
@@ -30,6 +31,7 @@ function CarDetail() {
       })
       .catch((error) => {
         console.log(error)
+        navigate("/error")
       })
 
     service.get(`/question/${params.carId}`)
@@ -39,6 +41,7 @@ function CarDetail() {
       })
       .catch((error) => {
         console.log(error)
+        navigate("/error")
       })
   }, [])
 
@@ -53,6 +56,7 @@ function CarDetail() {
       })
       .catch((error) => {
         console.log(error)
+        navigate("/error")
       })
   }
 
@@ -75,6 +79,7 @@ function CarDetail() {
           })
           .catch((error) => {
             console.log(error)
+            navigate("/error")
           })
 
         service.get(`/question/${params.carId}`)
@@ -84,10 +89,12 @@ function CarDetail() {
           })
           .catch((error) => {
             console.log(error)
+            navigate("/error")
           })
       })
       .catch((error) => {
         console.log(error)
+        navigate("/error")
       })
   }
 
@@ -102,24 +109,40 @@ function CarDetail() {
           })
           .catch((error) => {
             console.log(error)
+            navigate("/error")
           })
       })
       .catch((error) => {
         console.log(error)
+        navigate("/error")
       })
   }
 
   if (user === car.userCar) {
     return <div>
-      <Navegacion/>
+      <Navegacion />
       <div className='detalles'>
-        <img src={car.imageUrl} alt="imagen" width={"300px"}/>
+        <img src={car.imageUrl} alt="imagen" width={"300px"} />
         <h1>{car.name}</h1>
-        <h1>{car.price}€</h1>
-        <h2>Modelo: {car.model}</h2>
-        <h2>Año: {car.year}</h2>
-        <h2>{car.km} km</h2>
-        <h2>{car.cv} cv</h2>
+        <h1 id='precio'>{car.price}€</h1>
+        <Table striped bordered hover>
+          <thead>
+            <tr>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{car.year}</td>
+              <td>{car.km} km</td>
+              <td>{car.location}</td>
+              <td>{car.category}</td>
+              <td>{car.cv} cv</td>
+              <td>{car.model}</td>
+            </tr>
+          </tbody>
+        </Table>
+        <h4 id='descrpcion-detalles-titulo'>Descripción del anunciante</h4>
+        <h3 id='descrpcion-detalles'>{car.description}</h3>
       </div>
 
       {isLoggedIn && (
@@ -149,7 +172,7 @@ function CarDetail() {
           <Button variant='outline-danger' onClick={handleDelete}>Eliminar</Button>
           <Link to={`/edit-car/${params.carId}`}>
             <Button variant='outline-secondary'>Editar</Button>
-            </Link>
+          </Link>
         </div>
       )}
     </div>
@@ -157,24 +180,36 @@ function CarDetail() {
 
   return (
     <div>
-      <Navegacion/>
+      <Navegacion />
       <div className='detalles'>
-        <img src={car.imageUrl} alt="imagen" width={"300px"}/>
+        <img src={car.imageUrl} alt="imagen" width={"300px"} />
         <h1>{car.name}</h1>
-        <h1>{car.price}€</h1>
-        <h2>Modelo: {car.model}</h2>
-        <h2>Año: {car.year}</h2>
-        <h2>{car.km} km</h2>
-        <h2>{car.cv} cv</h2>
+        <h1 id='precio'>{car.price}€</h1>
+        <Table striped bordered hover>
+          <thead>
+            <tr>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{car.year}</td>
+              <td>{car.km} km</td>
+              <td>{car.location}</td>
+              <td>{car.category}</td>
+              <td>{car.cv} cv</td>
+              <td>{car.model}</td>
+            </tr>
+          </tbody>
+        </Table>
+        <h4 id='descrpcion-detalles-titulo'>Descripción del anunciante</h4>
+        <h3 id='descrpcion-detalles'>{car.description}</h3>
       </div>
-
-
       {isLoggedIn && (
         <div>
           <h3>Preguntas:</h3>
           <div>
             {questions.map((eachQuestion) => (
-              <div  key={eachQuestion._id}>
+              <div key={eachQuestion._id}>
                 <p>Pregunta de {eachQuestion.userName}</p>
                 <h4>{eachQuestion.question}</h4>
                 {user === eachQuestion.user && (

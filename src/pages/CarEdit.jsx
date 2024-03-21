@@ -1,13 +1,17 @@
-import React from 'react'
-import { useParams } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useState } from 'react'
 import service from '../services/config.services'
 import Navegacion from '../comonents/Navegacion'
+import services from "../services/file-upload.service"
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 
 function CarEdit() {
+    const navigate = useNavigate()
 
     const params = useParams()
-    
+
     const [name, setName] = useState("")
     const [model, setModel] = useState("")
     const [category, setCategory] = useState("")
@@ -15,6 +19,8 @@ function CarEdit() {
     const [cv, setCv] = useState(0)
     const [km, setKm] = useState(0)
     const [price, setPrice] = useState(0)
+    const [imageUrl, setImageUrl] = useState("")
+    const [description, setDescription] = useState("")
 
     const handleName = (event) => {
         let inputName = event.target.value
@@ -51,6 +57,24 @@ function CarEdit() {
         setModel(inputModel)
     }
 
+    const handleFileUpload = (e) => {
+        const uploadData = new FormData()
+
+        uploadData.append("imageUrl", e.target.files[0])
+
+        services
+            .uploadImage(uploadData)
+            .then(response => {
+                setImageUrl(response.fileUrl)
+            })
+            .catch(error => console.log("error al subir file", error))
+    }
+
+    const handleDescription = (event) => {
+        let inputDescription = event.target.value
+        setDescription(inputDescription)
+    }
+
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -62,71 +86,93 @@ function CarEdit() {
             year: year,
             cv: cv,
             km: km,
-            price: price
+            price: price,
+            imageUrl: imageUrl,
+            description: description
         }
 
         service.put(`/cars/${params.carId}`, newCar)
-        .then((response) => {
-            console.log(response.data)
+            .then((response) => {
+                console.log(response.data)
 
-            navigate(`/`)
-        })
-        .catch((error) => {
-            console.log(error)
-        })
+                navigate("/")
+            })
+            .catch((error) => {
+                console.log(error)
+                navigate("/error")
+            })
 
     }
 
-  return (
-    <div>
+    return (
+        <div>
+            <Navegacion />
 
-        <Navegacion/>
+            <Form onSubmit={handleSubmit}>
+                <h1>Editar Coche</h1>
+                <Form.Group className="mb-3" controlId="formBasicNombre">
+                    <Form.Label>Nombre:</Form.Label>
+                    <Form.Control type="text" placeholder="Nombre" onChange={handleName} value={name} />
+                </Form.Group>
 
-        <form onSubmit={handleSubmit}>
-            <h1>Editar Anunció</h1>
+                <Form.Group className="mb-3" controlId="formBasicAño">
+                    <Form.Label>Año:</Form.Label>
+                    <Form.Control type="Number" placeholder="Año" value={year} onChange={handleYear} />
+                </Form.Group>
 
-            
-            <label>Nombre:</label>
-            <input type="text" onChange={handleName} />
+                <Form.Group className="mb-3" controlId="formBasicCv">
+                    <Form.Label>CV:</Form.Label>
+                    <Form.Control type="Number" placeholder="CV" value={cv} onChange={handleCv} />
+                </Form.Group>
 
-            <label>Modelo:</label>
-            <select value={model} onChange={handleModel}>
-                <option value="">--Selecciona el Modelo--</option>
-                <option value="Toyota">Toyota</option>
-                <option value="Ford">Ford</option>
-                <option value="Seat">Seat</option>
-                <option value="Suzuki">Suzuki</option>
-                <option value="Renault">Renault</option>
-                <option value="Tesla">Tesla</option>
-                <option value="Mercedes">Mercedes</option>
-                <option value="Ferrari">Ferrari</option>
-            </select>
+                <Form.Group className="mb-3" controlId="formBasicKm">
+                    <Form.Label>KM:</Form.Label>
+                    <Form.Control type="Number" placeholder="Km" value={km} onChange={handleKm} />
+                </Form.Group>
 
-            <label>Categoria:</label>
-            <select value={category} onChange={handleCategory}>
-                <option value="">--Categoria--</option>
-                <option value="Suv">Suv</option>
-                <option value="Cabrio">Cabrio</option>
-                <option value="4x4">4x4</option>
-            </select>
+                <Form.Group className="mb-3" controlId="formBasicPrice">
+                    <Form.Label>Precio:</Form.Label>
+                    <Form.Control type="Number" placeholder="Precio" value={price} onChange={handlePrice} />
+                </Form.Group>
 
-            <label>Año:</label>
-            <input type="Number" value={year} onChange={handleYear} />
+                <Form.Group className="mb-3" controlId="formBasicDescription">
+                    <Form.Label>Descripción:</Form.Label>
+                    <Form.Control type="text" placeholder="Descripción" value={description} onChange={handleDescription} />
+                </Form.Group>
 
-            <label>CV:</label>
-            <input type="Number" value={cv} onChange={handleCv} />
+                <label>Modelo:</label>
+                <select value={model} onChange={handleModel}>
+                    <option value="">--Selecciona el Modelo--</option>
+                    <option value="Toyota">Toyota</option>
+                    <option value="Ford">Ford</option>
+                    <option value="Seat">Seat</option>
+                    <option value="Suzuki">Suzuki</option>
+                    <option value="Renault">Renault</option>
+                    <option value="Tesla">Tesla</option>
+                    <option value="Mercedes">Mercedes</option>
+                    <option value="Ferrari">Ferrari</option>
+                </select>
 
-            <label>KM:</label>
-            <input type="Number" value={km} onChange={handleKm} />
 
-            <label>Precio:</label>
-            <input type="Number" value={price} onChange={handlePrice} />
+                <label>Categoria:</label>
+                <select value={category} onChange={handleCategory}>
+                    <option value="">--Categoria--</option>
+                    <option value="Suv">Suv</option>
+                    <option value="Cabrio">Cabrio</option>
+                    <option value="4x4">4x4</option>
+                </select>
 
-            <button type='submit' >Publicar</button>
 
-        </form>
-    </div>
-  )
+                <h3>Seleccionar imagen</h3>
+                <input type="file" onChange={handleFileUpload} />
+
+                <br />
+                <Button variant="primary" type="submit">
+                    Submit
+                </Button>
+            </Form>
+        </div>
+    )
 }
 
 export default CarEdit

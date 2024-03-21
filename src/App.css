@@ -34,9 +34,62 @@ a {
 .todos-coches {
   padding-top: 20px;
 }
+@media(min-width: 700px) {
+  .todos-coches {
+    padding-top: 20px;
+    padding-left: 200px;
+    padding-right: 200px;
+  }
+}
+@media(min-width: 1090px) {
+  .todos-coches {
+    padding-top: 20px;
+    padding-left: 400px;
+    padding-right: 400px;
+  }
+}
+@media(min-width: 2000px) {
+  .todos-coches {
+    padding-top: 20px;
+    padding-left: 700px;
+    padding-right: 700px;
+  }
+}
 .carousel {
   padding: 50px;
 }
+@media(min-width: 700px) {
+  .carousel {
+    padding-left: 140px;
+    padding-right: 140px;
+  }
+}
+@media(min-width: 1090) {
+  .carousel {
+    padding-left: 280px;
+    padding-right: 280px;
+  }
+}
+@media(min-width: 2000px) {
+  .carousel {
+    padding-left: 700px;
+    padding-right: 700px;
+  }
+}
 .detalles {
   text-align: center;
+}
+#precio {
+  color: red;
+}
+#descrpcion-detalles {
+  margin-top: 20px;
+  margin-bottom: 60px;
+}
+#descrpcion-detalles-titulo {
+  margin-top: 60px;
+  text-decoration: underline;
+}
+#empezar {
+  padding-right: 20px;
 }

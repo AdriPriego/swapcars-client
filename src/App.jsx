@@ -14,6 +14,8 @@ import CarCreate from './pages/CarCreate'
 import CarEdit from './pages/CarEdit'
 import EditQuestion from './pages/EditQuestion'
 import Favorites from "./pages/Favorites"
+import NoEncontrado from "./pages/NoEncontrado"
+import Error from "./pages/Error"
 
 
 
@@ -35,7 +37,9 @@ function App() {
         <Route path='/signup' element={<SignUp />} />
         <Route path='/login' element={<Login />} />
 
-
+        <Route path='/error' element={<Error />} /> 
+        <Route path='*' element={<NoEncontrado />} />
+        
       </Routes>
     </div>
   )

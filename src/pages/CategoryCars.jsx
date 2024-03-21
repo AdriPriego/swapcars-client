@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
 import Navegacion from '../comonents/Navegacion'
 import { Link } from 'react-router-dom'
@@ -9,6 +9,7 @@ import Card from 'react-bootstrap/Card';
 const API_URL = import.meta.env.VITE_API_URL
 
 function CategoryCars() {
+  const navigate = useNavigate()
   const params = useParams()
 
   const [cars, setCars] = useState(null)
@@ -22,6 +23,7 @@ function CategoryCars() {
       })
       .catch((error) => {
         console.log(error)
+        navigate("/error")
       })
   }, [])
 
@@ -34,7 +36,7 @@ function CategoryCars() {
       <Navegacion />
       {cars.map((car) => (
         <div key={car._id}>
-          <Link to={`/car/${car._id}`}>
+          <Link to={`/car/${car._id}`} className='text-decoration-none'>
             <Card style={{ width: '18rem' }}>
               <Card.Img variant="top" src={car.imageUrl} />
               <Card.Body>

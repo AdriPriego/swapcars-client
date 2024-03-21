@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 import { useEffect } from 'react'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Suv from "../assets/suvss.png"
 import SuvCarousel from "../assets/suvs-tarjet.jpeg"
 import cuatro from "../assets/4x4.png"
@@ -22,8 +22,11 @@ import todoTerreno from "../assets/mucha.jpeg"
 
 
 function Home() {
+  const navigate = useNavigate()
+
   const [cars, setCars] = useState([])
   const { isLoggedIn, user, userName } = useContext(AuthContext)
+  
   useEffect(() => {
     service.get(`/cars`)
       .then((response) => {
@@ -32,6 +35,7 @@ function Home() {
       })
       .catch((error) => {
         console.log(error)
+        navigate("/error")
       })
   }, [])
 
@@ -79,7 +83,7 @@ function Home() {
       <div className='coches'>
         {cars.slice(0, 9).map((car) => (
           <div key={car._id}>
-            <Link to={`/car/${car._id}`}>
+            <Link to={`/car/${car._id}`} className='text-decoration-none'>
               <CardGroup className='todos-coches'>
                 <Card>
                   <Card.Img variant="top" src={car.imageUrl} width={"200px"}/>
@@ -99,7 +103,7 @@ function Home() {
 
       <div className='todas-categorias'>
         <CardGroup className='categories'>
-          <Link to={"/category/Suv"}>
+          <Link to={"/category/Suv"} className='text-decoration-none'>
             <CardGroup className='categoria'>
               <Card>
                 <Card.Img variant="top" src={Suv} />
@@ -110,10 +114,10 @@ function Home() {
             </CardGroup>
           </Link>
 
-          <Link to={"/category/Cabrio"}>
+          <Link to={"/category/Cabrio"} className='text-decoration-none'>
             <CardGroup className='categoria'>
               <Card>
-                <Card.Img id='imagen-4x4' variant="top" src={cuatro} />
+                <Card.Img id='imagen-4x4' variant="top" src={Cabrio} />
                 <Card.Body className='texto-coches'>
                   <Card.Title><h2>4x4</h2></Card.Title>
                 </Card.Body>
@@ -121,10 +125,10 @@ function Home() {
             </CardGroup>
           </Link>
 
-          <Link to={"/category/4x4"}>
+          <Link to={"/category/4x4"} className='text-decoration-none'>
             <CardGroup className='categoria'>
               <Card>
-                <Card.Img variant="top" src={Cabrio} />
+                <Card.Img variant="top" src={cuatro} />
                 <Card.Body className='texto-coches'>
                   <Card.Title><h2>Cabrio</h2></Card.Title>
                 </Card.Body>

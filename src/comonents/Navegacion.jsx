@@ -54,11 +54,11 @@ function Navegacion() {
                                     navbarScroll
                                 >
                                     <NavDropdown title={userName} id="navbarScrollingDropdown">
-                                        <Link to={"/create-car"}>
+                                        <Link to={"/create-car"} className='text-decoration-none'>
                                             Subir Coche
                                         </Link>
                                         <br />
-                                        <Link to={"/favorites"}>
+                                        <Link to={"/favorites"} className='text-decoration-none'>
                                             Favoritos
                                         </Link>
                                         <br />
@@ -103,8 +103,8 @@ function Navegacion() {
                     {
                         !isLoggedIn && (
                             <div>
-                                <Link to={"/signup"}>Registrase</Link>
-                                <Link to={"/login"}>Iniciar Session</Link>
+                                <Link className='text-decoration-none' id='empezar' to={"/signup"}>Registrase</Link>
+                                <Link className='text-decoration-none' to={"/login"}>Iniciar Session</Link>
                             </div>
                         )
                     }
