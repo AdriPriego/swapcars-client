@@ -9,17 +9,15 @@ import Cabrio from "../assets/cabrio-tarjet.jpg"
 import CardBody from 'react-bootstrap/CardBody'
 import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
-import service from "../services/file-upload.service"
 import { AuthContext } from '../context/auth.context'
 import { useContext } from 'react'
-
-const API_URL = import.meta.env.VITE_API_URL
+import service from '../services/config.services'
 
 function Home() {
   const [cars, setCars] = useState([])
   const { isLoggedIn, user, userName } = useContext(AuthContext)
   useEffect(() => {
-    axios.get(`${API_URL}/api/cars`)
+    service.get(`/cars`)
       .then((response) => {
         console.log(response.data)
         setCars(response.data)

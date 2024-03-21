@@ -1,19 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import axios from 'axios'
 import NavBar from "../comonents/Navbar"
 import { Link } from 'react-router-dom'
 import { AuthContext } from '../context/auth.context'
 import { useContext } from 'react'
-
-const API_URL = import.meta.env.VITE_API_URL
+import service from '../services/config.services'
 
 function CarDetail() {
   const navigate = useNavigate()
-  const { isLoggedIn, user } = useContext(AuthContext)
-
-  //const userCretor = userCar === user._id
-
+  const { isLoggedIn, user, userName } = useContext(AuthContext)
 
   const params = useParams()
   const [car, setCar] = useState(null)
@@ -27,7 +22,7 @@ function CarDetail() {
   }
 
   useEffect(() => {
-    axios.get(`${API_URL}/api/cars/${params.carId}`)
+    service.get(`/cars/${params.carId}`)
       .then((response) => {
         setCar(response.data)
         console.log(response.data)
@@ -36,7 +31,7 @@ function CarDetail() {
         console.log(error)
       })
 
-    axios.get(`${API_URL}/api/question/${params.carId}`)
+    service.get(`/question/${params.carId}`)
       .then((response) => {
         console.log(response.data)
         setQuestion(response.data)
@@ -51,7 +46,7 @@ function CarDetail() {
   }
 
   const handleDelete = () => {
-    axios.delete(`${API_URL}/api/cars/${params.carId}`)
+    service.delete(`/cars/${params.carId}`)
       .then(() => {
         navigate("/")
       })
@@ -63,14 +58,15 @@ function CarDetail() {
   const submitQuestion = () => {
 
     const newQuestion = {
-      question: sendQuestion
+      question: sendQuestion,
+      user: user
     }
 
-    axios.post(`${API_URL}/api/question/${params.carId}/${user._id}`, newQuestion)
+    service.post(`question/${params.carId}`, newQuestion)
       .then((response) => {
         console.log(response.data)
         setSendQuestion("")
-        axios.get(`${API_URL}/api/cars/${params.carId}`)
+        service.get(`/cars/${params.carId}`)
           .then((response) => {
             setCar(response.data)
             console.log(response.data)
@@ -79,7 +75,7 @@ function CarDetail() {
             console.log(error)
           })
 
-        axios.get(`${API_URL}/api/question/${params.carId}`)
+        service.get(`/question/${params.carId}`)
           .then((response) => {
             console.log(response.data)
             setQuestion(response.data)
@@ -94,10 +90,10 @@ function CarDetail() {
   }
 
   const deleteQuestion = () => {
-    axios.delete(`${API_URL}/api/question?question=${questions}`)
+    service.delete(`/${questionId}`)
       .then(() => {
         console.log("eliminado")
-        axios.get(`${API_URL}/api/question/${params.carId}`)
+        service.get(`/question/${params.carId}`)
           .then((response) => {
             console.log(response.data)
             setQuestion(response.data)

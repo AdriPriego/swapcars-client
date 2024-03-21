@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import axios from 'axios'
 import service from '../services/config.services'
 import Navbar from '../comonents/Navbar'
 import { AuthContext } from '../context/auth.context'
 import { useContext } from 'react'
 import services from "../services/file-upload.service"
 
-const API_URL = import.meta.env.VITE_API_URL
 
 function CarCreate() {
 

@@ -4,9 +4,7 @@ import { Link } from 'react-router-dom'
 import { useContext } from 'react'
 import { AuthContext } from '../context/auth.context'
 import { Navigate } from "react-router-dom";
-import axios from 'axios'
-
-const API_URL = import.meta.env.VITE_API_URL
+import service from '../services/config.services'
 
 function Navbar() {
 
@@ -22,7 +20,7 @@ function Navbar() {
   const handleSearch = (e) => {
     e.preventDefault()
 
-    axios.get(`${API_URL}/api/search?query=${buscar}`)
+    service.get(`/search?query=${buscar}`)
     .then((response) => {
       console.log(response.data)
       setResultadoBuscar(response.data)
@@ -72,6 +70,8 @@ function Navbar() {
         </div>
       )}
     </nav>
+
+    
   )
 }
 

@@ -1,12 +1,8 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import { useState } from 'react'
-import axios from 'axios'
+import service from '../services/config.services'
 import Navbar from '../comonents/Navbar'
-
-
-const API_URL = import.meta.env.VITE_API_URL
-
 
 function CarEdit() {
 
@@ -69,7 +65,7 @@ function CarEdit() {
             price: price
         }
 
-        axios.put(`${API_URL}/api/cars/${params.carId}`, newCar)
+        service.put(`/cars/${params.carId}`, newCar)
         .then((response) => {
             console.log(response.data)
 

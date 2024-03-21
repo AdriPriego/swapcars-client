@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import Navbar from '../comonents/Navbar'
-import axios from 'axios'
+import service from '../services/config.services'
 
-const API_URL = import.meta.env.VITE_API_URL
 
 function EditQuestion() {
     const params = useParams()
@@ -23,7 +22,7 @@ function EditQuestion() {
             question: question
         }
 
-        axios.put(`${API_URL}/api/question/${params.questionId}`, newQuestion)
+        service.put(`question/${params.questionId}`, newQuestion)
         .then((response) => {
             console.log(response.data)
 
