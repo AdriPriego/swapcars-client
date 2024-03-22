@@ -22,6 +22,7 @@ import todoTerreno from "../assets/mucha.jpeg"
 import Coupe from "../assets/coupe.png"
 import Berlina from "../assets/berlina.png"
 import PickUp from "../assets/pick-up.png"
+import Jeep from "../assets/jeepç.jpg"
 
 function Home() {
   const navigate = useNavigate()
@@ -32,11 +33,9 @@ function Home() {
   useEffect(() => {
     service.get(`/cars`)
       .then((response) => {
-        console.log(response.data)
         setCars(response.data)
       })
       .catch((error) => {
-        console.log(error)
         navigate("/error")
       })
   }, [])
@@ -73,7 +72,7 @@ function Home() {
           <Link to={"/category/4x4"}>
             <img
               className="d-block w-100"
-              src={todoTerreno}
+              src={Jeep}
               alt="Third slide"
             />
           </Link>
@@ -93,7 +92,7 @@ function Home() {
                     <Card.Title><h2>{car.name}</h2></Card.Title>
                     <h4>{car.model}</h4>
                     <h4>{car.km}km</h4>
-                    <h4>{car.price}€</h4>
+                    <h4 id='precio-home'>{car.price}€</h4>
                   </Card.Body>
                 </Card>
               </CardGroup>

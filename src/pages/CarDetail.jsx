@@ -27,45 +27,39 @@ function CarDetail() {
     service.get(`/cars/${params.carId}`)
       .then((response) => {
         setCar(response.data)
-        console.log(response.data)
         setIsFavorite(response.data.isFavorite)
       })
       .catch((error) => {
-        console.log(error)
         navigate("/error")
       })
 
     service.get(`/question/${params.carId}`)
       .then((response) => {
-        console.log(response.data)
         setQuestion(response.data)
       })
       .catch((error) => {
-        console.log(error)
         navigate("/error")
       })
   }, [])
 
   const añadirFavoritos = () => {
     service.post(`/cars/${params.carId}/favorite`)
-    .then(response => {
-      setIsFavorite(!isFavorite)
-    })
-    .catch((error) => {
-      console.log(error)
-      navigate("/error")
-    })
+      .then(response => {
+        setIsFavorite(!isFavorite)
+      })
+      .catch((error) => {
+        navigate("/error")
+      })
   }
 
-  const  eliminarFavoritos = () => {
+  const eliminarFavoritos = () => {
     service.delete(`/cars/${params.carId}/favorite`)
-    .then((response) => {
-      setIsFavorite(false)
-    })
-    .catch((error) => {
-      console.log(error)
-      navigate("/error")
-    })
+      .then((response) => {
+        setIsFavorite(false)
+      })
+      .catch((error) => {
+        navigate("/error")
+      })
   }
 
   if (!car) {
@@ -78,7 +72,6 @@ function CarDetail() {
         navigate("/")
       })
       .catch((error) => {
-        console.log(error)
         navigate("/error")
       })
   }
@@ -93,30 +86,24 @@ function CarDetail() {
 
     service.post(`question/${params.carId}`, newQuestion)
       .then((response) => {
-        console.log(response.data)
         setSendQuestion("")
         service.get(`/cars/${params.carId}`)
           .then((response) => {
             setCar(response.data)
-            console.log(response.data)
           })
           .catch((error) => {
-            console.log(error)
             navigate("/error")
           })
 
         service.get(`/question/${params.carId}`)
           .then((response) => {
-            console.log(response.data)
             setQuestion(response.data)
           })
           .catch((error) => {
-            console.log(error)
             navigate("/error")
           })
       })
       .catch((error) => {
-        console.log(error)
         navigate("/error")
       })
   }
@@ -127,16 +114,13 @@ function CarDetail() {
         console.log("eliminado")
         service.get(`/question/${params.carId}`)
           .then((response) => {
-            console.log(response.data)
             setQuestion(response.data)
           })
           .catch((error) => {
-            console.log(error)
             navigate("/error")
           })
       })
       .catch((error) => {
-        console.log(error)
         navigate("/error")
       })
   }
@@ -157,7 +141,6 @@ function CarDetail() {
             <tr>
               <td>{car.year}</td>
               <td>{car.km} km</td>
-              <td> <Button variant='outline-light' onClick={isFavorite ? eliminarFavoritos : añadirFavoritos}>{isFavorite ? "🤍" : "❤️"}</Button></td>
               <td>{car.category}</td>
               <td>{car.cv} cv</td>
               <td>{car.model}</td>
@@ -189,6 +172,7 @@ function CarDetail() {
 
           <input type="text" value={sendQuestion} onChange={handleQuestion} placeholder='Escribe tu pregunta' />
           <Button variant='outline-success' onClick={submitQuestion}>Crear</Button>
+          <Button variant='outline-light' onClick={isFavorite ? eliminarFavoritos : añadirFavoritos}>{isFavorite ? "🤍" : "❤️"}</Button>
           <br />
           <br />
           <Button variant='outline-danger' onClick={handleDelete}>Eliminar</Button>
@@ -205,7 +189,7 @@ function CarDetail() {
       <Navegacion />
       <div className='detalles'>
         <img src={car.imageUrl} alt="imagen" width={"300px"} />
-        <div className='info-principal'>  
+        <div className='info-principal'>
           <h1>{car.name}</h1>
           <h1 id='precio'>{car.price}€</h1>
         </div>
@@ -218,7 +202,6 @@ function CarDetail() {
             <tr>
               <td>{car.year}</td>
               <td>{car.km} km</td>
-              <td><Button variant='outline-light' onClick={isFavorite ? eliminarFavoritos : añadirFavoritos}>{isFavorite ? "🤍" : "❤️"}</Button></td>
               <td>{car.category}</td>
               <td>{car.cv} cv</td>
               <td>{car.model}</td>
@@ -249,6 +232,7 @@ function CarDetail() {
 
           <input type="text" value={sendQuestion} onChange={handleQuestion} placeholder='Escribe tu pregunta' />
           <Button variant='outline-success' onClick={submitQuestion}>Crear</Button>
+          <Button variant='outline-light' onClick={isFavorite ? eliminarFavoritos : añadirFavoritos}>{isFavorite ? "🤍" : "❤️"}</Button>
         </div>
       )}
     </div>

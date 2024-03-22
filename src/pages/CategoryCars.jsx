@@ -18,11 +18,9 @@ function CategoryCars() {
   useEffect(() => {
     axios.get(`${API_URL}/api/category/${params.categoryName}`)
       .then((response) => {
-        console.log(response.data)
         setCars(response.data)
       })
       .catch((error) => {
-        console.log(error)
         navigate("/error")
       })
   }, [])

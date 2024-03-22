@@ -31,9 +31,9 @@ function SignUp() {
             location,
             password
         }
-        
+
         try {
-            
+
             await axios.post(`${API_URL}/api/auth/signup`, newUser)
 
             navigate("/login")
@@ -44,17 +44,17 @@ function SignUp() {
             if (errorCode === 400) {
                 setErrorMessage(errorMessage)
             } else {
-                console.log(error)
+                navigate("/error")
             }
         }
     }
 
-  return (
-    <div>
-        <img src={Logo} alt="logo" width={"300px"}/>
-        <h1>Registrate</h1>
+    return (
+        <div>
+            <img src={Logo} alt="logo" width={"300px"} />
+            <h1>Registrate</h1>
 
-        <Form onSubmit={handleSignup}>
+            <Form onSubmit={handleSignup}>
                 <Form.Group className="mb-3" controlId="formBasicName">
                     <Form.Label>Nombre</Form.Label>
                     <Form.Control value={name} onChange={handleName} type="text" placeholder="Nombre" />
@@ -81,8 +81,8 @@ function SignUp() {
                     Submit
                 </Button>
             </Form>
-    </div>
-  )
+        </div>
+    )
 }
 
 export default SignUp

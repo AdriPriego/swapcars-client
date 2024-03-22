@@ -51,8 +51,8 @@ a {
 @media(min-width: 2000px) {
   .todos-coches {
     padding-top: 20px;
-    padding-left: 700px;
-    padding-right: 700px;
+    padding-left: 1200px;
+    padding-right: 1200px;
   }
 }
 .carousel {
@@ -136,4 +136,7 @@ a {
 }
 #descripcion-server {
   margin-top: 30px;
+}
+#precio-home {
+  color: red;
 }

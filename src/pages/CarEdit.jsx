@@ -26,10 +26,9 @@ function CarEdit() {
         const dataCarDetails = async () => {
 
             try {
-                
+
                 const response = await service.get(`/cars/${params.carId}`)
                 const carData = response.data
-                console.log(response.data)
                 setName(carData.name)
                 setModel(carData.model)
                 setCategory(carData.category)
@@ -41,7 +40,7 @@ function CarEdit() {
                 setDescription(carData.description)
 
             } catch (error) {
-                console.log(error)
+                navigate("/error")
             }
         }
         dataCarDetails()
@@ -118,12 +117,10 @@ function CarEdit() {
 
         service.put(`/cars/${params.carId}`, newCar)
             .then((response) => {
-                console.log(response.data)
 
                 navigate("/")
             })
             .catch((error) => {
-                console.log(error)
                 navigate("/error")
             })
 
@@ -176,6 +173,11 @@ function CarEdit() {
                     <option value="Tesla">Tesla</option>
                     <option value="Mercedes">Mercedes</option>
                     <option value="Ferrari">Ferrari</option>
+                    <option value="Volkswagen">Volkswagen</option>
+                    <option value="Nissan">Nissan</option>
+                    <option value="Bmw">Bmw</option>
+                    <option value="Audi">Audi</option>
+                    <option value="Skoda">Skoda</option>
                 </select>
 
 

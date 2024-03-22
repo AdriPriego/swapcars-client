@@ -70,7 +70,7 @@ function CarCreate() {
             .then(response => {
                 setImageUrl(response.fileUrl)
             })
-            .catch(error => console.log("error al subir file", error))
+            .catch(error => navigate("/error"))
     }
 
     const handleDescription = (event) => {
@@ -97,12 +97,10 @@ function CarCreate() {
 
         service.post(`/cars`, newCar)
             .then((response) => {
-                console.log(response.data)
 
                 navigate("/")
             })
             .catch((error) => {
-                console.log(error)
                 navigate("/error")
             })
 
@@ -143,7 +141,7 @@ function CarCreate() {
                     <Form.Label>Descripción:</Form.Label>
                     <Form.Control type="text" placeholder="Descripción" value={description} onChange={handleDescription} />
                 </Form.Group>
-                
+
                 <label>Modelo:</label>
                 <select value={model} onChange={handleModel}>
                     <option value="">--Selecciona el Modelo--</option>
@@ -155,6 +153,11 @@ function CarCreate() {
                     <option value="Tesla">Tesla</option>
                     <option value="Mercedes">Mercedes</option>
                     <option value="Ferrari">Ferrari</option>
+                    <option value="Volkswagen">Volkswagen</option>
+                    <option value="Nissan">Nissan</option>
+                    <option value="Bmw">Bmw</option>
+                    <option value="Audi">Audi</option>
+                    <option value="Skoda">Skoda</option>
                 </select>
 
 

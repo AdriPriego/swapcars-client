@@ -29,7 +29,6 @@ function Navegacion() {
 
         service.get(`/search?query=${buscar}`)
             .then((response) => {
-                console.log(response.data)
                 setResultadoBuscar(response.data)
             })
             .catch((error) => {

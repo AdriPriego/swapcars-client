@@ -15,7 +15,7 @@ function EditQuestion() {
         setQuestion(inputQuestion)
     }
 
-    const handleSubmit = (e) =>  {
+    const handleSubmit = (e) => {
         e.preventDefault()
 
         const newQuestion = {
@@ -23,34 +23,32 @@ function EditQuestion() {
         }
 
         service.put(`question/${params.questionId}`, newQuestion)
-        .then((response) => {
-            console.log(response.data)
+            .then((response) => {
 
-            navigate(`/`)
-        })
-        .catch((error) => {
-            console.log(error)
-            navigate("/error")
-        })
+                navigate(`/`)
+            })
+            .catch((error) => {
+                navigate("/error")
+            })
     }
 
-  return (
-    <div>
-        <Navegacion/>
+    return (
+        <div>
+            <Navegacion />
 
-        <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit}>
 
-            <h1>Editar Pregunta:</h1>
+                <h1>Editar Pregunta:</h1>
 
-            <label>Pregunta:</label>
-            <input type="text" value={question} onChange={handleQuestion}/>
+                <label>Pregunta:</label>
+                <input type="text" value={question} onChange={handleQuestion} />
 
-            <button type='submit'>Confirmar</button>
+                <button type='submit'>Confirmar</button>
 
-        </form>
+            </form>
 
-    </div>
-  )
+        </div>
+    )
 }
 
 export default EditQuestion

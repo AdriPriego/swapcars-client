@@ -33,7 +33,6 @@ function Login(props) {
         try {
 
             const response = await axios.post(`${API_URL}/api/auth/login`, credentials)
-            console.log(response.data.authToken)
 
             storeToken(response.data.authToken)
 
@@ -58,7 +57,7 @@ function Login(props) {
         <div>
             <img src={Logo} alt="Logo" width={"300px"} />
             <h1>Inicar Session</h1>
-            
+
             <Form onSubmit={handleLogin}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email</Form.Label>
